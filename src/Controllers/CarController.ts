@@ -17,13 +17,13 @@ class CarController {
 
   public async CarCreate() {
     const car: ICar = {
-      year: this.req.body.year,
       model: this.req.body.model,
+      year: this.req.body.year,
       color: this.req.body.color,
-      status: this.req.body.status,
       buyValue: this.req.body.buyValue,
       doorsQty: this.req.body.doorsQty,
       seatsQty: this.req.body.seatsQty,
+      status: this.req.body.status,
     };
 
     try {
@@ -34,5 +34,5 @@ class CarController {
     }
   }
 }
-  
+
 export default CarController;

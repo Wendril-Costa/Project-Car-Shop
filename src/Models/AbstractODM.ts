@@ -1,9 +1,4 @@
-import { 
-  Model, 
-  Schema, 
-  models, 
-  model, 
-} from 'mongoose';
+import { Model, Schema, models, model } from 'mongoose';
 
 abstract class AbstractODM<T> {
   protected model: Model<T>;
