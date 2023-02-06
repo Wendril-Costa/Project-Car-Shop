@@ -8,20 +8,13 @@ class Vehicle {
   protected status: boolean | undefined;
   protected buyValue: number;
 
-  constructor({
-    id,
-    model,
-    year,
-    color,
-    status,
-    buyValue,  
-  }: IVehicle) {
-    this.id = id;
-    this.model = model;
-    this.year = year;
-    this.color = color;
-    this.buyValue = buyValue;
-    this.status = status;
+  constructor(vehicle: IVehicle) {
+    this.id = vehicle.id;
+    this.model = vehicle.model;
+    this.year = vehicle.year;
+    this.color = vehicle.color;
+    this.buyValue = vehicle.buyValue;
+    this.status = vehicle.status;
   }
 }
 
