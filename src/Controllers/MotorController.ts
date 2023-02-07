@@ -34,6 +34,26 @@ class MotorController {
       this.next(error);
     }
   }
+
+  public async MotorcycleGetAll() {
+    const motors = await this.service.MotorcycleGetAll();
+
+    return this.res.status(200).json(motors);
+  }
+
+  public async MotorcycleGetById() {
+    const { id } = this.req.params;
+
+    const regex = /^[a-f\d]{24}$/i;
+
+    if (!regex.test(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+    
+    const motor = await this.service.MotorcycleGetById(id);
+
+    if (motor) return this.res.status(200).json(motor);
+  
+    return this.res.status(404).json({ message: 'Motorcycle not found' });
+  }
 }
 
 export default MotorController;

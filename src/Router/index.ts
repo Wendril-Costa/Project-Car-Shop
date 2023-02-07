@@ -4,9 +4,31 @@ import MotorController from '../Controllers/MotorController';
 
 const routes = Router();
 
-routes.get('/', (req, res) => res.send('Funcionando'));
+routes
+  .get('/', (req, res) => res.send('Funcionando'));
 
-routes.post('/cars', (req, res, next) => new CarController(req, res, next).CarCreate());
-routes.post('/motorcycles', (req, res, next) => new MotorController(req, res, next).MotorCreate());
+routes
+  .post('/cars', (req, res, next) => new CarController(req, res, next)
+    .CarCreate());
+
+routes
+  .get('/cars', (req, res, next) => new CarController(req, res, next)
+    .CarGetAll());
+
+routes
+  .get('/cars/:id', (req, res, next) => new CarController(req, res, next)
+    .CarGetById());
+
+routes
+  .get('/motorcycles', (req, res, next) => new MotorController(req, res, next)
+    .MotorcycleGetAll());
+
+routes
+  .get('/motorcycles/:id', (req, res, next) => new MotorController(req, res, next)
+    .MotorcycleGetById());
+
+routes
+  .post('/motorcycles', (req, res, next) => new MotorController(req, res, next)
+    .MotorCreate());
 
 export default routes;

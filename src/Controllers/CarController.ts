@@ -28,11 +28,31 @@ class CarController {
 
     try {
       const newCar = await this.service.CarCreate(car);
-      
+
       return this.res.status(201).json(newCar);
     } catch (error) {
       this.next(error);
     }
+  }
+
+  public async CarGetAll() {
+    const cars = await this.service.CarGetAll();
+
+    return this.res.status(200).json(cars);
+  }
+
+  public async CarGetById() {
+    const { id } = this.req.params;
+
+    const regex = /^[a-f\d]{24}$/i;
+
+    if (!regex.test(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+    
+    const car = await this.service.CarGetById(id);
+
+    if (car) return this.res.status(200).json(car);
+  
+    return this.res.status(404).json({ message: 'Car not found' });
   }
 }
 
