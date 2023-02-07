@@ -38,6 +38,14 @@ class MotorService {
 
     return motorsArray;
   }
+
+  public async MotorcycleUpdate(motor: IMotorcycle, id: string) {
+    const motorcycleODM = new MotorcycleODM();
+
+    const updatedMotor = await motorcycleODM.update(id, motor);
+    
+    return this.createMotorDomain(updatedMotor);
+  }
 }
 
 export default MotorService;

@@ -20,6 +20,10 @@ routes
     .CarGetById());
 
 routes
+  .put('/cars/:id', (req, res, next) => new CarController(req, res, next)
+    .CarUpdate());
+      
+routes
   .get('/motorcycles', (req, res, next) => new MotorController(req, res, next)
     .MotorcycleGetAll());
 
@@ -30,5 +34,9 @@ routes
 routes
   .post('/motorcycles', (req, res, next) => new MotorController(req, res, next)
     .MotorCreate());
+
+routes
+  .put('/motorcycles/:id', (req, res, next) => new MotorController(req, res, next)
+    .MotorcycleUpdate());
 
 export default routes;

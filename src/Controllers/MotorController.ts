@@ -54,6 +54,36 @@ class MotorController {
   
     return this.res.status(404).json({ message: 'Motorcycle not found' });
   }
+
+  public async MotorcycleUpdate() {
+    const { id } = this.req.params;
+
+    const motorcycle: IMotorcycle = {
+      model: this.req.body.model,
+      year: this.req.body.year,
+      color: this.req.body.color,
+      status: this.req.body.status,
+      buyValue: this.req.body.buyValue,
+      category: this.req.body.category,
+      engineCapacity: this.req.body.engineCapacity,
+    };
+  
+    try {
+      const regex = /^[a-f\d]{24}$/i;
+
+      if (!regex.test(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+
+      const motorId = await this.service.MotorcycleGetById(id);
+
+      if (!motorId) return this.res.status(404).json({ message: 'Motorcycle not found' });
+
+      const newMotor = await this.service.MotorcycleUpdate(motorcycle, id);
+
+      return this.res.status(200).json(newMotor);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default MotorController;
