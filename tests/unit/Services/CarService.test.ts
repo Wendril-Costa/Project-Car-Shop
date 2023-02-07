@@ -9,6 +9,16 @@ describe('Test para o Car Service', function () {
     Sinon.restore();
   });
 
+  it('Deveria pegar todos os carros ', async function () {
+    Sinon.stub(Model, 'find').resolves([carOutput]);
+    
+    const service = new CarService();
+
+    const result = await service.CarGetAll();
+
+    expect(result).to.be.deep.equal([carOutput]);
+  });
+
   it('Deveria criar um Carro no Banco', async function () {
     Sinon.stub(Model, 'create').resolves(carOutput);
 

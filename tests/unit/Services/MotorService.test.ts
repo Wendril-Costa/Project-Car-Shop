@@ -9,7 +9,7 @@ describe('Test para o Car Service', function () {
     Sinon.restore();
   });
 
-  it('Deveria criar um Carro no Banco', async function () {
+  it('Deveria criar um motos no Banco', async function () {
     Sinon.stub(Model, 'create').resolves(motorOutput);
 
     const { id, ...motor } = motorOutput;
@@ -41,5 +41,15 @@ describe('Test para o Car Service', function () {
     const result = await service.MotorcycleUpdate(motor, id as string);
 
     expect(result).to.be.deep.equal(motorOutput);
+  });
+
+  it('Retorna uma moto do MotorGetById', async function () {
+    Sinon.stub(Model, 'findOne').resolves(motorOutput);
+
+    const service = new MotorService();
+    
+    const result = await service.MotorcycleGetById('3634851dasdafa3f3123124123e12312');
+
+    expect(result).to.be.deep.eq(motorOutput);
   });
 });
